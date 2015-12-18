@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="exampledbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Utente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cognome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="amministratore" Type="Int32" />
+    <Property Name="euro" Type="Single" />
+  </EntityType>
+  <EntityContainer Name="exampledbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Utenti" EntityType="exampledbModel.Utente" />
+  </EntityContainer>
+</Schema>
