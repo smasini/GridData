@@ -9,6 +9,8 @@
             Selectable: true,
             MaxElements: 10,
             Filter: [true],
+            CallbackStart: openLoader,
+            CallbackEnd: closeLoader,
             Order: [],
                 Columns: [
                     {
@@ -73,6 +75,14 @@
 
     function edit(pk) {
         console.log(pk);
+    }
+
+    function openLoader() {
+        console.log('avvio modale di caricamento');
+    }
+
+    function closeLoader() {
+        console.log('chiudo modale di caricamento');
     }
 </script>
 

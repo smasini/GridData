@@ -11,22 +11,26 @@
     var CurrentPage = 1;
     var ContainerID = '';
     var Selectable = false;
+    var CallbackStart;
+    var CallbackEnd;
     var methods = {
-        Refresh: function(){
-            console.log('refresh');
+        Refresh: function(json){
+            console.log('Refresh');
+            if (json) {
+                getJson(json);
+            }
+            CallbackStart
+                CallbackStart();
+            InitGrid();
         },
         MakeGrid:
             function (json) {
-                console.log('make grid');
-                InitJson = json;
+                console.log('MakeGrid');
                 ContainerID = this.selector.replace('#', '');
-                MaxElements = json.MaxElements;
-                ClassName = json.ClassName;
-                NumColumns = json.Columns.length + json.ActionColumns.length;
-                if (json.Selectable)
-                    NumColumns++;
-                FilterParams = json.Filter;
-                OrderParams = json.Order;
+                getJson(json);
+
+                if (CallbackStart)
+                    CallbackStart();
 
                 InitGrid();
                 
@@ -43,6 +47,19 @@
         InitGrid();
     };
     
+    var getJson = function (json) {
+        InitJson = json;
+        CallbackStart = json.CallbackStart;
+        CallbackEnd = json.CallbackEnd;
+        MaxElements = json.MaxElements;
+        ClassName = json.ClassName;
+        NumColumns = json.Columns.length + json.ActionColumns.length;
+        if (json.Selectable)
+            NumColumns++;
+        FilterParams = json.Filter;
+        OrderParams = json.Order;
+    };
+
     var InitGrid = function () {
         ExecutePageMethod("/GridLibrary/GridCreator.aspx", "MakeGrid", { ClassName: ClassName, MaxElementsForPage: MaxElements, CurrentPage: CurrentPage, Filter: FilterParams, Order: OrderParams }, true, function (jsonRet) {
             
@@ -199,6 +216,8 @@
             // componentHandler.upgradeAllRegistered();
             document.getElementById(ContainerID).innerHTML = '';
             document.getElementById(ContainerID).appendChild(table);
+            if(CallbackEnd)
+                CallbackEnd();
         }, function () {
             console.log("errore");
         });
