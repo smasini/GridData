@@ -7,7 +7,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Grid.GridLibrary
+namespace DataGridTable.Grid
 {
     public partial class GridCreator : System.Web.UI.Page
     {

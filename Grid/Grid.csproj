@@ -107,9 +107,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GridLibrary\grid.css" />
-    <Content Include="GridLibrary\grid.js" />
-    <Content Include="GridLibrary\GridCreator.aspx" />
+    <EmbeddedResource Include="Grid\grid.js" />
+    <Content Include="Grid\GridCreator.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -125,6 +126,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\ExecutePageMethod.js" />
+    <Content Include="scripts\jquery.tablednd.js" />
     <Content Include="Site1.Master" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -153,13 +155,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GridLibrary\GridBase.cs" />
-    <Compile Include="GridLibrary\GridCreator.aspx.cs">
+    <Compile Include="Grid\GridBase.cs" />
+    <Compile Include="Grid\GridCreator.aspx.cs">
       <DependentUpon>GridCreator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GridLibrary\GridCreator.aspx.designer.cs">
-      <DependentUpon>GridCreator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>

@@ -1,0 +1,4 @@
+F:\Progetti\VisualStudio\Grid\DataGridTable\bin\Debug\DataGridTable.dll
+F:\Progetti\VisualStudio\Grid\DataGridTable\bin\Debug\DataGridTable.pdb
+F:\Progetti\VisualStudio\Grid\DataGridTable\obj\Debug\DataGridTable.dll
+F:\Progetti\VisualStudio\Grid\DataGridTable\obj\Debug\DataGridTable.pdb

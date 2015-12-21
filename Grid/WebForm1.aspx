@@ -12,6 +12,7 @@
             CallbackStart: openLoader,
             CallbackEnd: closeLoader,
             Order: [],
+            Sortable: false,
                 Columns: [
                     {
                         ColumnName: "id",

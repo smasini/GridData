@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GridCreator.aspx.cs" Inherits="Grid.GridLibrary.GridCreator" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GridCreator.aspx.cs" Inherits="DataGridTable.Grid.GridCreator" %>
 
 <!DOCTYPE html>
 

@@ -12,9 +12,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <script src="/scripts/jquery.tablednd.js"></script>
     <script src="/scripts/ExecutePageMethod.js"></script>
-    <link href="/GridLibrary/grid.css" rel="stylesheet" />
-    <script src="/GridLibrary/grid.js"></script>
+    <script src="/Grid/grid.js"></script>
+    <script src="http://listjs.com/no-cdn/list.js"></script>
+    
+    
+    
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>-->
+    <script>
+        $(document).ready(function () {
+            var options = {
+                valueNames: ['name', 'born']
+            };
+            var userList = new List('users', options);
+
+        });
+    </script>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -27,6 +42,36 @@
         <div class="mdl-tooltip" for="p1">
             Header
         </div>-->
+        <div id="users">
+  <input class="search" placeholder="Search" />
+  <button class="sort" type="button" data-sort="name">
+    Sort by name
+  </button>
+            <span class="sort" type="button" data-sort="born">
+    Sort by born
+  </span>
+  <table>
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+      <tr>
+        <td class="name">Jonny Stromberg</td>
+        <td class="born">1986</td>
+      </tr>
+      <tr>
+        <td class="name">Jonas Arnklint</td>
+        <td class="born">1985</td>
+      </tr>
+      <tr>
+        <td class="name">Martina Elm</td>
+        <td class="born">1986</td>
+      </tr>
+      <tr>
+        <td class="name">Gustaf Lindqvist</td>
+        <td class="born">1983</td>
+      </tr>
+    </tbody>
+  </table>
+
     <div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         

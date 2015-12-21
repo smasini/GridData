@@ -37,4 +37,3 @@ F:\Progetti\VisualStudio\Grid\Grid\bin\Microsoft.ApplicationInsights.xml
 F:\Progetti\VisualStudio\Grid\Grid\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 F:\Progetti\VisualStudio\Grid\Grid\obj\Debug\Grid.dll
 F:\Progetti\VisualStudio\Grid\Grid\obj\Debug\Grid.pdb
-F:\Progetti\VisualStudio\Grid\Grid\obj\Debug\Grid.csprojResolveAssemblyReference.cache

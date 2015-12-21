@@ -1,4 +1,5 @@
-﻿using Grid.GridLibrary;
+﻿
+using Grid.Grid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace Grid
             //eventuali filtri e ordinamenti
 
             return utenti;
+        }
+
+        public override void OnSort(int PKRecordToMove, int PKRecordAfter)
+        {
+            exampledbEntities context = new exampledbEntities();
+
+            var ute = context.Utenti.FirstOrDefault(a=>a.id == PKRecordToMove);
+
+            
         }
     }
 }

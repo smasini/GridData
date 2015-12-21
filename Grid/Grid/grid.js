@@ -11,6 +11,7 @@
     var CurrentPage = 1;
     var ContainerID = '';
     var Selectable = false;
+    var Sortable = false;
     var CallbackStart;
     var CallbackEnd;
     var methods = {
@@ -51,6 +52,7 @@
         InitJson = json;
         CallbackStart = json.CallbackStart;
         CallbackEnd = json.CallbackEnd;
+        Sortable = json.Sortable;
         MaxElements = json.MaxElements;
         ClassName = json.ClassName;
         NumColumns = json.Columns.length + json.ActionColumns.length;
@@ -61,7 +63,7 @@
     };
 
     var InitGrid = function () {
-        ExecutePageMethod("/GridLibrary/GridCreator.aspx", "MakeGrid", { ClassName: ClassName, MaxElementsForPage: MaxElements, CurrentPage: CurrentPage, Filter: FilterParams, Order: OrderParams }, true, function (jsonRet) {
+        ExecutePageMethod("/Grid/GridCreator.aspx", "MakeGrid", { ClassName: ClassName, MaxElementsForPage: MaxElements, CurrentPage: CurrentPage, Filter: FilterParams, Order: OrderParams }, true, function (jsonRet) {
             
             console.log(jsonRet);
             
@@ -73,8 +75,10 @@
 
             var table = document.createElement('table');
             table.className = 'grid mdl-data-table mdl-shadow--2dp';
+            table.style.minWidth = '100%'; //min-width:100%;
 
             var thead = document.createElement('thead');
+            //thead.className = 'mdl-color--primary-dark';
 
             if (Selectable) {
                 thead.appendChild(createCheckBoxTHorTD('th'));
@@ -107,6 +111,8 @@
                 var PKRow = objects[row][pkRowName];
 
                 var tr = document.createElement('tr');
+                tr.id = PKRow;
+                tr.setAttribute('data-pk', PKRow);
 
                 if (Selectable) {
                     tr.appendChild(createCheckBoxTHorTD('td', PKRow));
@@ -137,11 +143,14 @@
                         }
                     }
                 }
-                table.appendChild(tr);
+                tbody.appendChild(tr);
             }
-
+            table.appendChild(tbody);
             var tfoot = document.createElement('tfoot');
+           // tfoot.className = 'mdl-color--accent';
             var tr = document.createElement('tr');
+            tr.id = 'tr_foot';
+            tr.className = "nodrop";
             var td = document.createElement('td');
             td.className = 'mdl-data-table__cell--non-numeric';
             td.setAttribute('colspan', (NumColumns - 1));
@@ -215,7 +224,31 @@
             componentHandler.upgradeElement(table);
             // componentHandler.upgradeAllRegistered();
             document.getElementById(ContainerID).innerHTML = '';
+            table.id = ContainerID + "_table";
             document.getElementById(ContainerID).appendChild(table);
+
+            if (Sortable) {
+                $('#' + ContainerID + "_table").tableDnD({
+                    onDragClass: "mdl-color--grey-400",
+                    onDrop: function (table, row) {
+                        var pk = row.getAttribute('data-pk');
+                        var rows = table.tBodies[0].rows;
+                        var pkPrimaRigaSuccessiva = -1;
+                        for (var i = 0; i < rows.length; i++) {
+                            if (rows[i]) {
+                                if (rows[i].id == row.id) {
+                                    if (i + 1 < rows.length) {
+                                        pkPrimaRigaSuccessiva = rows[i+1].getAttribute('data-pk');
+                                    }
+                                    break;
+                                }  
+                            }
+                        }
+                        ExecutePageMethod("/Grid/GridCreator.aspx", "ChangeOrder", { PKToMove: pk, PKToAfter: pkPrimaRigaSuccessiva, ClassName: ClassName }, true, function () { }, function () { });
+                    }
+                });
+            }
+
             if(CallbackEnd)
                 CallbackEnd();
         }, function () {
